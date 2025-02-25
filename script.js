@@ -1,8 +1,19 @@
+const quoteContainer = document.getElementById('quote-container');
+const quoteText = document.getElementById('quote');
+const quoteAuthor = document.getElementById('author');
+const twitterButton = document.getElementById('twitter');
+const moreWisdomButton = document.getElementById('new-quote');
 let apiQuotes = [];
 
 function newQuote() {
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-    console.log(quote)
+    quoteAuthor.textContent = quote.author;
+    quoteText.textContent = quote.text ? quote.text : "unknown";
+    if(quote.text.length > 120) {
+        quoteText.classList.add('long-quote')
+    } else {
+        quoteText.classList.remove('long-quote')
+    }
 }
 
 async function getQuotes() {
@@ -18,4 +29,10 @@ async function getQuotes() {
     
 }
 
+function tweetQuote (){
+    
+}
+
 getQuotes();
+
+moreWisdomButton.addEventListener('click', newQuote);
