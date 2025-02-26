@@ -24,15 +24,20 @@ async function getQuotes() {
         newQuote();
 
     } catch(error) {
-
+        console.error('error fetching quotes', error);
+        quoteText.textContent = "Oops! Something went wrong. Please try again later.";
     }
     
 }
 
 function tweetQuote (){
-    
+    const quote = quoteText.textContent;
+    const author = quoteAuthor.textContent;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
+    window.open(twitterUrl, '_blank');
 }
 
 getQuotes();
 
 moreWisdomButton.addEventListener('click', newQuote);
+twitterButton.addEventListener('click', tweetQuote);
